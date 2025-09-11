@@ -4,5 +4,13 @@
   "workspaces": [
     "front",
     "back"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "scripts": {
+    "start:backend": "cd back && ./mvnw spring-boot:run",
+    "start:frontend": "cd front && yarn dev",
+    "dev": "concurrently \"yarn:start:backend\" \"yarn:start:frontend\""
+  }
 }
