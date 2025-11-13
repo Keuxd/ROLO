@@ -1,5 +1,4 @@
 import Carousel from '@/components/carousel';
-import RoloLayout from '@/components/layout';
 import bannerData from '@/mockData/banner';
 import categorieData from '@/mockData/categories';
 import productsData from '@/mockData/products';
@@ -16,10 +15,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import Link from 'next/link';
 
 export default function MarketPlace() {
   return (
-    <RoloLayout>
+    <>
       <Carousel>
         {bannerData.map((banner, index) => (
           <Box
@@ -101,87 +101,98 @@ export default function MarketPlace() {
         >
           {productsData.map((product, index) => (
             <Grid key={index} size={1}>
-              <Card
-                variant='outlined'
-                sx={{ borderRadius: '0.5em', height: '100%' }}
+              <Link
+                href={`/marketplace/product/${product.id}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <CardMedia component='img' height={160} image={product.image} />
-                <CardContent sx={{ padding: 1 }}>
-                  <Typography variant='body2' color='textSecondary'>
-                    {product.name}
-                  </Typography>
-                  <Typography variant='body1' color='primary'>
-                    R$ {product.price}
-                  </Typography>
-                </CardContent>
-                <Box
-                  component='div'
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1,
-                    padding: 0,
-                    paddingTop: 1,
-                    margin: 1,
-                    marginTop: 0,
-                    borderTop: '1px solid #7C7F85',
-                  }}
+                <Card
+                  variant='outlined'
+                  sx={{ borderRadius: '0.5em', height: '100%' }}
                 >
+                  <CardMedia
+                    component='img'
+                    height={160}
+                    image={product.image}
+                  />
+                  <CardContent sx={{ padding: 1 }}>
+                    <Typography variant='body2' color='textSecondary'>
+                      {product.name}
+                    </Typography>
+                    <Typography variant='body1' color='primary'>
+                      R$ {product.price}
+                    </Typography>
+                  </CardContent>
                   <Box
                     component='div'
                     sx={{
                       display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
+                      flexDirection: 'column',
                       gap: 1,
+                      padding: 0,
+                      paddingTop: 1,
+                      margin: 1,
+                      marginTop: 0,
+                      borderTop: '1px solid #7C7F85',
                     }}
                   >
-                    <Avatar
-                      src={product.seller.Avatar}
-                      alt={`${product.seller.name} avatar`}
-                      sx={{ width: 24, height: 24 }}
-                    />
-                    <Typography variant='body2' sx={{ fontSize: 12 }}>
-                      {product.seller.name}
-                    </Typography>
-                  </Box>
-                  <Box
-                    component='div'
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Typography variant='body2' sx={{ fontSize: 12 }}>
-                      {(() => {
-                        const now = new Date();
-                        const date = new Date(product.dateTime);
-                        const diffMs = now.getTime() - date.getTime();
-                        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-                        const diffDays = Math.floor(
-                          diffMs / (1000 * 60 * 60 * 24)
-                        );
+                    <Box
+                      component='div'
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 1,
+                      }}
+                    >
+                      <Avatar
+                        src={product.seller.Avatar}
+                        alt={`${product.seller.name} avatar`}
+                        sx={{ width: 24, height: 24 }}
+                      />
+                      <Typography variant='body2' sx={{ fontSize: 12 }}>
+                        {product.seller.name}
+                      </Typography>
+                    </Box>
+                    <Box
+                      component='div'
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <Typography variant='body2' sx={{ fontSize: 12 }}>
+                        {(() => {
+                          const now = new Date();
+                          const date = new Date(product.dateTime);
+                          const diffMs = now.getTime() - date.getTime();
+                          const diffHours = Math.floor(
+                            diffMs / (1000 * 60 * 60)
+                          );
+                          const diffDays = Math.floor(
+                            diffMs / (1000 * 60 * 60 * 24)
+                          );
 
-                        if (diffHours < 24) {
-                          return `${diffHours} ${diffHours === 1 ? 'hora' : 'horas'}`;
-                        } else if (diffDays === 1) {
-                          return 'ontem';
-                        } else {
-                          return `${diffDays} ${diffDays === 1 ? 'dia' : 'dias'}`;
-                        }
-                      })()}
-                    </Typography>
-                    <Typography variant='body2' sx={{ fontSize: 12 }}>
-                      {product.location.city} - {product.location.state}
-                    </Typography>
+                          if (diffHours < 24) {
+                            return `${diffHours} ${diffHours === 1 ? 'hora' : 'horas'}`;
+                          } else if (diffDays === 1) {
+                            return 'ontem';
+                          } else {
+                            return `${diffDays} ${diffDays === 1 ? 'dia' : 'dias'}`;
+                          }
+                        })()}
+                      </Typography>
+                      <Typography variant='body2' sx={{ fontSize: 12 }}>
+                        {product.location.city} - {product.location.state}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Card>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>
       </Box>
-    </RoloLayout>
+    </>
   );
 }

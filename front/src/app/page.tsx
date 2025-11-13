@@ -1,5 +1,10 @@
+import RoloLayout from '@/components/layout';
 import MarketPlace from './marketplace/page';
 
 export default function Home() {
-  return <MarketPlace />;
+  return (
+    <RoloLayout>
+      <MarketPlace />
+    </RoloLayout>
+  );
 }

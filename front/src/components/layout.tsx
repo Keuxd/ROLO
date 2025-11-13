@@ -41,7 +41,7 @@ export default function RoloLayout({ children }: layoutProps) {
           padding: 2,
         }}
       >
-        <Link href='/' passHref>
+        <Link href='/'>
           <Box
             component='img'
             src='/logo.svg'
@@ -76,36 +76,41 @@ export default function RoloLayout({ children }: layoutProps) {
         anchor='right'
         slotProps={{ paper: { sx: { width: '80%', padding: 2 } } }}
       >
-        <Box
-          component='div'
-          sx={{
-            width: '100%',
-            height: '11em',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 3.5,
-            marginBottom: 3.5,
-            borderBottom: '1px solid #D1D4DA',
-          }}
+        <Link
+          href={'/auth'}
+          style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <Avatar
-            src={'avatar_placeholder.png'}
-            alt='Avatar do Usuário'
-            sx={{ width: '2.5em', height: '2.5em' }}
-          />
-          <Box component='div' sx={{ textAlign: 'center' }}>
-            <Typography variant='h3'>Entre ou Cadastre-se</Typography>
-            <Typography
-              variant='subtitle1'
-              color='textDisabled'
-              sx={{ fontWeight: 'regular' }}
-            >
-              E venha fazer um Rolo
-            </Typography>
+          <Box
+            component='div'
+            sx={{
+              width: '100%',
+              height: '11em',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 3.5,
+              marginBottom: 3.5,
+              borderBottom: '1px solid #D1D4DA',
+            }}
+          >
+            <Avatar
+              src={'avatar_placeholder.png'}
+              alt='Avatar do Usuário'
+              sx={{ width: '2.5em', height: '2.5em' }}
+            />
+            <Box component='div' sx={{ textAlign: 'center' }}>
+              <Typography variant='h3'>Entre ou Cadastre-se</Typography>
+              <Typography
+                variant='subtitle1'
+                color='textDisabled'
+                sx={{ fontWeight: 'regular' }}
+              >
+                E venha fazer um Rolo
+              </Typography>
+            </Box>
           </Box>
-        </Box>
+        </Link>
         <Toolbar
           disableGutters
           sx={{
